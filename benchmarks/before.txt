@@ -1,0 +1,12 @@
+goos: linux
+goarch: amd64
+pkg: github.com/kstsm/wb-l4.5/internal/service
+cpu: AMD Ryzen 5 3600 6-Core Processor              
+BenchmarkConcatenate-12    	    5115	    207677 ns/op	  577190 B/op	     805 allocs/op
+BenchmarkConcatenate-12    	    6038	    231522 ns/op	  577189 B/op	     805 allocs/op
+BenchmarkConcatenate-12    	    5872	    247380 ns/op	  577188 B/op	     805 allocs/op
+BenchmarkConcatenate-12    	    4363	    238234 ns/op	  577188 B/op	     805 allocs/op
+BenchmarkConcatenate-12    	    5355	    211150 ns/op	  577189 B/op	     805 allocs/op
+BenchmarkConcatenate-12    	    5925	    205850 ns/op	  577188 B/op	     805 allocs/op
+PASS
+ok  	github.com/kstsm/wb-l4.5/internal/service	7.467s
