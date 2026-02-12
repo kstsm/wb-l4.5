@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"strings"
 	"unicode"
 
 	"github.com/gookit/slog"
@@ -29,20 +30,18 @@ func (s *Service) Concatenate(ctx context.Context, req dto.AddRequest) (dto.AddR
 	if len(req.Items) == 0 {
 		return dto.AddResponse{}, ErrEmptyItems
 	}
-	var parts []string
-	for _, item := range req.Items {
-		t := transformString(item)
-		parts = append(parts, t)
-		parts = append(parts, reverseCopy(t))
-	}
-	result := ""
-	for i, p := range parts {
+	var b strings.Builder
+	n := len(req.Items) * 8
+	b.Grow(n * 32)
+	for i, item := range req.Items {
 		if i > 0 {
-			result = result + "|"
+			b.WriteString("|")
 		}
-		result = result + p
+		b.WriteString(transformString(item))
+		b.WriteString("|")
+		b.WriteString(reverseCopy(transformString(item)))
 	}
-	return dto.AddResponse{Result: result}, nil
+	return dto.AddResponse{Result: b.String()}, nil
 }
 
 func transformString(s string) string {
